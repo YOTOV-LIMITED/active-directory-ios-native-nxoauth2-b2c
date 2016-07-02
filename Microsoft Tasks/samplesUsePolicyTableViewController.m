@@ -8,7 +8,6 @@
 
 #import "samplesUsePolicyTableViewController.h"
 #import "samplesWebAPIConnector.h"
-#import "ADALiOS/ADAuthenticationContext.h"
 #import "samplesUseViewController.h"
 
 @interface samplesUsePolicyTableViewController ()

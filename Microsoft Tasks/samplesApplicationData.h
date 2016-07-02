@@ -12,6 +12,7 @@
 #import <Foundation/Foundation.h>
 #import "samplesTaskItem.h"
 #import "samplesPolicyData.h"
+#import "NXOAuth2.h"
 
 @interface SamplesApplicationData : NSObject
 
@@ -28,6 +29,8 @@
 @property (strong) NSString* emailSignUpPolicyId;
 @property BOOL fullScreen;
 @property BOOL showClaims;
+@property (strong) NSString* currentPolicyId;
+@property (strong) NSNotification* notification;
 
 +(id) getInstance;
 

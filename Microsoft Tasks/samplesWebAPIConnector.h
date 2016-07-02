@@ -26,7 +26,7 @@ completionBlock:(void (^) (bool, NSError* error)) completionBlock;
 
 +(void) doPolicy:(samplesPolicyData*)policy
          parent:(UIViewController*) parent
-completionBlock:(void (^) (ADProfileInfo* userInfo, NSError* error)) completionBlock;
+completionBlock:(void (^) (NSNotification* userinfo, NSError* error)) completionBlock;
 
 +(void) signOut;
 

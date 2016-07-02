@@ -113,11 +113,11 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     
-    SamplesApplicationData* appData = [SamplesApplicationData getInstance];
+    SamplesApplicationData* data = [SamplesApplicationData getInstance];
     NXOAuth2AccountStore *store = [NXOAuth2AccountStore sharedStore];
-    NSArray *accounts = [store accountsWithAccountType:@"myGraphService"];
+    NSArray *accounts = [store accountsWithAccountType:@"myB2CService"];
     
-    if(appData.userItem)
+    if(data.notification.userInfo)
     {
         [self loadData];
     }

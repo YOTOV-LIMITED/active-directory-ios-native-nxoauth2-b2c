@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface samplesUserLoginViewController : UIViewController
-- (IBAction)signInFBPressed:(id)sender;
-- (IBAction)signInEmailPressed:(id)sender;
-- (IBAction)signUpEmailPressed:(id)sender;
+@interface samplesUserLoginViewController : UIViewController <UIWebViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UIWebView *loginView;
+
+- (void)handleOAuth2AccessResult:(NSString *)accessResult;
+- (void)setupOAuth2AccountStore;
+- (void)requestOAuth2Access;
 
 @end

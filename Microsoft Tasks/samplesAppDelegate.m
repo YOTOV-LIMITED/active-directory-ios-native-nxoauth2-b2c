@@ -10,7 +10,6 @@
 #import <Foundation/Foundation.h>
 #import "samplesTaskItem.h"
 #import "samplesPolicyData.h"
-#import "ADALiOS/ADAuthenticationResult.h"
 #import "samplesApplicationData.h"
 
 @implementation samplesAppDelegate

@@ -69,7 +69,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RBS-Ot-NYG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-486" y="-444"/>
+            <point key="canvasLocation" x="158" y="-445"/>
         </scene>
         <!--Add New Task-->
         <scene sceneID="dff-cz-dcj">
@@ -113,7 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="61U-2j-oWA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="152" y="-444"/>
+            <point key="canvasLocation" x="1124" y="-469"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uX0-JS-am8">
@@ -137,7 +137,7 @@
         <!--Get Started-->
         <scene sceneID="Jte-63-8gO">
             <objects>
-                <viewController storyboardIdentifier="LoginUserView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="80e-F7-zNi" customClass="samplesUserLoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginUserView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="80e-F7-zNi" customClass="samplesPolicySelectorViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FPb-NC-hhc"/>
                         <viewControllerLayoutGuide type="bottom" id="OrS-ky-xMy"/>
@@ -147,7 +147,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" editable="NO" text="If you're a first time user, create an account. You will be immediately signed in to your new account." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p05-Vv-JDG">
-                                <frame key="frameInset" minX="24" minY="416" width="272" height="81"/>
+                                <frame key="frameInset" minX="36" minY="225" width="272" height="81"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                 </accessibility>
@@ -175,18 +175,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="facebookButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iys-Rb-uZR" userLabel="facebookButton">
+                                <frame key="frameInset" minX="75" minY="124" width="194" height="35"/>
+                                <state key="normal" image="signin-fb.png"/>
+                                <connections>
+                                    <action selector="signInFBPressed:" destination="80e-F7-zNi" eventType="touchUpInside" id="Cl5-Bd-398"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Av-3T-P3o">
                                 <frame key="frameInset" minX="75" minY="167" width="194" height="35"/>
                                 <state key="normal" image="signin-email.png"/>
                                 <connections>
                                     <action selector="signInEmailPressed:" destination="80e-F7-zNi" eventType="touchUpInside" id="AtF-tH-bdo"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="facebookButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iys-Rb-uZR" userLabel="facebookButton">
-                                <frame key="frameInset" minX="75" minY="126" width="194" height="35"/>
-                                <state key="normal" image="signin-fb.png"/>
-                                <connections>
-                                    <action selector="signInFBPressed:" destination="80e-F7-zNi" eventType="touchUpInside" id="Cl5-Bd-398"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -211,10 +211,16 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="emailLogin" destination="3Av-3T-P3o" id="DwY-hD-jFi"/>
+                        <outlet property="fbLogin" destination="Iys-Rb-uZR" id="sQe-ss-E4P"/>
+                        <outlet property="signInEmailPressed" destination="3Av-3T-P3o" id="o8n-bO-2NO"/>
+                        <outlet property="signInFBPressed" destination="Iys-Rb-uZR" id="HQW-WH-1ba"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OQ1-8q-naM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-52" y="884"/>
+            <point key="canvasLocation" x="614" y="603"/>
         </scene>
         <!--Settings-->
         <scene sceneID="5KC-nG-aka">
@@ -270,7 +276,40 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tim-Zt-JYZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-486" y="570"/>
+            <point key="canvasLocation" x="-48" y="818"/>
+        </scene>
+        <!--Samples User Login View Controller-->
+        <scene sceneID="f5x-eZ-DbX">
+            <objects>
+                <viewController id="1fK-vS-avh" customClass="samplesUserLoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aD1-w3-bXM"/>
+                        <viewControllerLayoutGuide type="bottom" id="mfx-oC-oWZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="d9O-l2-4bU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iV1-nI-ieJ">
+                                <frame key="frameInset" minX="2" minY="20" width="371" height="627"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hdz-ny-Fim">
+                                <frame key="frameInset" minX="2" minY="20" width="371" height="627"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="loginView" destination="Hdz-ny-Fim" id="2X0-Sd-rbN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CUC-GK-bsQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1039.5" y="599.5"/>
         </scene>
         <!--Claims View-->
         <scene sceneID="FZY-ex-Sqw">
@@ -314,7 +353,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMf-DT-rAz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="345" y="884"/>
+            <point key="canvasLocation" x="1482" y="600"/>
         </scene>
         <!--Samples App Settings Controller-->
         <scene sceneID="V0I-4S-I30">
@@ -506,7 +545,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YSF-U4-Bcq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-46" y="235"/>
+            <point key="canvasLocation" x="34" y="1779"/>
         </scene>
     </scenes>
     <resources>

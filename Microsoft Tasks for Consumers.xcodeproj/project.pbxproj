@@ -21,6 +21,7 @@
 		B8D009DC1ACDF0B300C842CC /* Policy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B8D009DA1ACDF0B300C842CC /* Policy.xcdatamodeld */; };
 		B8D00A181ACE085700C842CC /* samplesUsePolicyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D00A171ACE085700C842CC /* samplesUsePolicyTableViewController.m */; };
 		B8D00A1F1ACE4DF800C842CC /* samplesUseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D00A1E1ACE4DF800C842CC /* samplesUseViewController.m */; };
+		FB0E76991D2709840081D3CF /* samplesPolicySelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB0E76981D2709840081D3CF /* samplesPolicySelectorViewController.m */; };
 		FB33714918CA5B7E00234804 /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB33714818CA5B7E00234804 /* settings.plist */; };
 		FB3BF22018D0106C007E645E /* samplesWebAPIConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3BF21F18D0106C007E645E /* samplesWebAPIConnector.m */; };
 		FB3BF23518D03A88007E645E /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB3BF23218D03A88007E645E /* Main_iPhone.storyboard */; };
@@ -75,6 +76,8 @@
 		BE1BE405644A406563C93532 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CD3A1E7903044ED9B1D16952 /* Pods-Microsoft Tasks for Consumers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Microsoft Tasks for Consumers.release.xcconfig"; path = "Pods/Target Support Files/Pods-Microsoft Tasks for Consumers/Pods-Microsoft Tasks for Consumers.release.xcconfig"; sourceTree = "<group>"; };
 		F38096135D57D9DDDF18D89C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB0E76971D2709840081D3CF /* samplesPolicySelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = samplesPolicySelectorViewController.h; sourceTree = "<group>"; };
+		FB0E76981D2709840081D3CF /* samplesPolicySelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = samplesPolicySelectorViewController.m; sourceTree = "<group>"; };
 		FB33714818CA5B7E00234804 /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
 		FB3BF21E18D0106C007E645E /* samplesWebAPIConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = samplesWebAPIConnector.h; sourceTree = "<group>"; };
 		FB3BF21F18D0106C007E645E /* samplesWebAPIConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = samplesWebAPIConnector.m; sourceTree = "<group>"; };
@@ -241,6 +244,8 @@
 				B81583ED1AD318CB00CCA892 /* NSDictionary+UrlEncoding.m */,
 				FB3F00ED18C7016200173598 /* Microsoft_Tasks.xcdatamodeld */,
 				FB3BF23218D03A88007E645E /* Main_iPhone.storyboard */,
+				FB0E76971D2709840081D3CF /* samplesPolicySelectorViewController.h */,
+				FB0E76981D2709840081D3CF /* samplesPolicySelectorViewController.m */,
 			);
 			name = "UI Code - do not touch";
 			sourceTree = "<group>";
@@ -398,6 +403,7 @@
 				FB538F2D1BA36653003ABD9A /* TPKeyboardAvoidingScrollView.m in Sources */,
 				97C15AF41A27FDF0004A0419 /* SamplesSelectUserViewController.m in Sources */,
 				FB3F00E818C7016200173598 /* main.m in Sources */,
+				FB0E76991D2709840081D3CF /* samplesPolicySelectorViewController.m in Sources */,
 				B8D009D91ACDDF3B00C842CC /* samplesAddPolicyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

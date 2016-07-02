@@ -28,7 +28,8 @@
         instance.correlationId = [dictionary objectForKey:@"correlationId"];
         instance.faceBookSignInPolicyId = [dictionary objectForKey:@"faceBookSignInPolicyId"];
         instance.emailSignInPolicyId = [dictionary objectForKey:@"emailSignInPolicyId"];
-        instance.emailSignUpPolicyId = [dictionary objectForKey:@"emailSignUpPolicyId"];
+        instance.currentPolicyId = nil;
+        instance.notification = nil;
         
     });
     

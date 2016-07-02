@@ -28,6 +28,19 @@
 
 @implementation samplesWebAPIConnector
 
+NSString *scopes = @"offline_access Directory.ReadWrite.All";
+NSString *authURL = @"https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
+NSString *loginURL = @"https://login.microsoftonline.com/common/login";
+NSString *bhh = @"urn:ietf:wg:oauth:2.0:oob?code=";
+NSString *tokenURL = @"https://login.microsoftonline.com/common/oauth2/v2.0/token";
+NSString *keychain = @"com.microsoft.azureactivedirectory.samples.graph.QuickStart";
+static NSString * const kIDMOAuth2SuccessPagePrefix = @"session_state=";
+NSURL *myRequestedUrl;
+NSURL *myLoadedUrl;
+bool loginFlow = FALSE;
+bool isRequestBusy;
+NSURL *authcode;
+
 // Set up to read Policies from CoreData
 //
 // TODO: Add Application Settings to CoreData as well
@@ -55,230 +68,52 @@ bool loadedApplicationSettings;
     return [toTrim stringByTrimmingCharactersInSet:set];
 }
 
-+(void) getTokenClearingCache : (BOOL) clearCache
-           parent:(UIViewController*) parent
-completionHandler:(void (^) (NSString*, NSError*))completionBlock;
+
++(void) getTokenWithPolicy:         (BOOL) clearCache
+                                    policy:(samplesPolicyData *)policy
+                                    params:(NSDictionary*) params
+                                    parent:(UIViewController*) parent
+                                    completionBlock:(void (^) (NSNotification*, NSError* error)) completionBlock
 {
-    SamplesApplicationData* data = [SamplesApplicationData getInstance];
-   // NSString *userId = [[NSString alloc]init];
-    if(data.userItem){
-        completionBlock(data.userItem.accessToken, nil);
-        return;
-    }
-    
- /*   
-    if(data.userItem && data.userItem.userInformation)
-    {
-        userId = data.userItem.profileInfo.username;    }
-    else
-    {
-        userId = nil;
-    }
-  */
 
-    
-    ADAuthenticationError *error;
-    authContext = [ADAuthenticationContext authenticationContextWithAuthority:data.authority error:&error];
-    authContext.parentController = parent;
-    NSURL *redirectUri = [[NSURL alloc]initWithString:data.redirectUriString];
-    
-    if(!data.correlationId ||
-       [[data.correlationId stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0)
-    {
-        authContext.correlationId = [[NSUUID alloc] initWithUUIDString:data.correlationId];
-    }
-    
-    [ADAuthenticationSettings sharedInstance].enableFullScreen = data.fullScreen;
-    [authContext acquireTokenWithScopes:data.scopes
-                                additionalScopes: nil
-                                 clientId:data.clientId
-                                 redirectUri:redirectUri
-                                 identifier:[ADUserIdentifier identifierWithId:data.userItem.profileInfo.username type:RequiredDisplayableId]
-                                 promptBehavior:AD_PROMPT_AUTO
-                          completionBlock:^(ADAuthenticationResult *result) {
-        
-        if (result.status != AD_SUCCEEDED)
-        {
-            completionBlock(nil, result.error);
-        }   
-        else
-        {
-            data.userItem = result.tokenCacheStoreItem;
-            completionBlock(result.tokenCacheStoreItem.accessToken, nil);
-        }
-    }];
-}
+SamplesApplicationData* data = [SamplesApplicationData getInstance];
 
-//getToken for support of sending extra (and unknown) params to the authorization and token endpoints
-//
-//
+[[NXOAuth2AccountStore sharedStore] setClientID:data.clientId
+                                         secret:nil
+                                          scope:[NSSet setWithObject:scopes]
+                               authorizationURL:[NSURL URLWithString:authURL]
+                                       tokenURL:[NSURL URLWithString:tokenURL]
+                                    redirectURL:[NSURL URLWithString:data.redirectUriString]
+                                  keyChainGroup: keychain
+                                 forAccountType:@"myB2CService"];
 
-+(void) getTokenWithExtraParamsClearingCache : (BOOL) clearCache
-           params:(NSDictionary*) params
-           parent:(UIViewController*) parent
-completionHandler:(void (^) (NSString*, NSError*))completionBlock;
-{
-    SamplesApplicationData* data = [SamplesApplicationData getInstance];
+[[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreAccountsDidChangeNotification
+                                                  object:[NXOAuth2AccountStore sharedStore]
+                                                   queue:nil
+                                              usingBlock:^(NSNotification *aNotification) {
+                                                  if (aNotification.userInfo) {
+                                                      //account added, we have access
+                                                      //we can now request protected data
+                                                      NSLog(@"Success!! We have an access token.");
+                                                      completionBlock(aNotification.userInfo.allKeys.firstObject, nil);
+                                                      
+                                                  } else {
+                                                      //account removed, we lost access
+                                                      NSError *error = nil;
+                                                      NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+                                                      [errorDetail setValue:@"Lost access token" forKey:NSLocalizedDescriptionKey];
+                                                      error = [NSError errorWithDomain:@"myB2CService" code:100 userInfo:errorDetail];
+                                                      completionBlock(nil, error);
+                                                  }
+                                              }];
 
-    
-    ADAuthenticationError *error;
-    authContext = [ADAuthenticationContext authenticationContextWithAuthority:data.authority error:&error];
-    authContext.parentController = parent;
-    NSURL *redirectUri = [[NSURL alloc]initWithString:data.redirectUriString];
-    
-    if(!data.correlationId ||
-       [[data.correlationId stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0)
-    {
-        authContext.correlationId = [[NSUUID alloc] initWithUUIDString:data.correlationId];
-    }
-    
-    [ADAuthenticationSettings sharedInstance].enableFullScreen = data.fullScreen;
-    [authContext acquireTokenWithScopes:data.scopes
-                                additionalScopes: data.additionalScopes
-                                 clientId:data.clientId
-                              redirectUri:redirectUri
-                                   identifier:[ADUserIdentifier identifierWithId:data.userItem.profileInfo.username type:RequiredDisplayableId]
-                         promptBehavior:AD_PROMPT_ALWAYS
-                     extraQueryParameters: params.urlEncodedString
-                          completionBlock:^(ADAuthenticationResult *result) {
-                              
-                              if (result.status != AD_SUCCEEDED)
-                              {
-                                  completionBlock(nil, result.error);
-                              }
-                              else
-                              {
-                                  data.userItem = result.tokenCacheStoreItem;
-                                  completionBlock(result.tokenCacheStoreItem.accessToken, nil);
-                              }
-                          }];
-}
-
-+(void) getTokenWithPolicyClearingCache  : (BOOL) clearCache
-                          params:(NSDictionary*) params
-                          parent:(UIViewController*) parent
-               completionHandler:(void (^) (NSString*, NSError*))completionBlock;
-{
-    SamplesApplicationData* data = [SamplesApplicationData getInstance];
-    
-    
-    ADAuthenticationError *error;
-    authContext = [ADAuthenticationContext authenticationContextWithAuthority:data.authority error:&error];
-    authContext.parentController = parent;
-    NSURL *redirectUri = [[NSURL alloc]initWithString:data.redirectUriString];
-    
-    if(!data.correlationId ||
-       [[data.correlationId stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0)
-    {
-        authContext.correlationId = [[NSUUID alloc] initWithUUIDString:data.correlationId];
-    }
-    
-    [ADAuthenticationSettings sharedInstance].enableFullScreen = data.fullScreen;
-    [authContext acquireTokenWithScopes:data.scopes
-                                additionalScopes: data.additionalScopes
-                                 clientId:data.clientId
-                              redirectUri:redirectUri
-                            identifier:[ADUserIdentifier identifierWithId:data.userItem.profileInfo.username type:RequiredDisplayableId]
-                                promptBehavior:AD_PROMPT_ALWAYS
-                                extraQueryParameters: params.urlEncodedString
-                                policy: nil
-                          completionBlock:^(ADAuthenticationResult *result) {
-                              
-                              if (result.status != AD_SUCCEEDED)
-                              {
-                                  completionBlock(nil, result.error);
-                              }
-                              else
-                              {
-                                  data.userItem = result.tokenCacheStoreItem;
-                                  completionBlock(result.tokenCacheStoreItem.accessToken, nil);
-                              }
-                          }];
-}
-
-
-+(void) getClaimsWithExtraParamsClearingCache  : (BOOL) clearCache
-                          params:(NSDictionary*) params
-                          parent:(UIViewController*) parent
-               completionHandler:(void (^) (ADProfileInfo*, NSError*))completionBlock;
-{
-    SamplesApplicationData* data = [SamplesApplicationData getInstance];
-    
-    
-    ADAuthenticationError *error;
-    authContext = [ADAuthenticationContext authenticationContextWithAuthority:data.authority error:&error];
-    authContext.parentController = parent;
-    NSURL *redirectUri = [[NSURL alloc]initWithString:data.redirectUriString];
-    
-    if(!data.correlationId ||
-       [[data.correlationId stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0)
-    {
-        authContext.correlationId = [[NSUUID alloc] initWithUUIDString:data.correlationId];
-    }
-    
-    [ADAuthenticationSettings sharedInstance].enableFullScreen = data.fullScreen;
-    [authContext acquireTokenWithScopes:data.scopes
-                            additionalScopes: data.additionalScopes
-                              clientId:data.clientId
-                           redirectUri:redirectUri
-                            identifier:[ADUserIdentifier identifierWithId:data.userItem.profileInfo.username type:RequiredDisplayableId]
-                            promptBehavior:AD_PROMPT_ALWAYS
-                  extraQueryParameters: params.urlEncodedString
-                       completionBlock:^(ADAuthenticationResult *result) {
-                           
-                           if (result.status != AD_SUCCEEDED)
-                           {
-                               completionBlock(nil, result.error);
-                           }
-                              else
-                              {
-                                  data.userItem = result.tokenCacheStoreItem;
-                                  completionBlock(result.tokenCacheStoreItem.profileInfo, nil);
-                              }
-                          }];
-}
-
-
-+(void) getClaimsWithPolicyClearingCache  : (BOOL) clearCache
-                           policy:(samplesPolicyData *)policy
-                           params:(NSDictionary*) params
-                           parent:(UIViewController*) parent
-                completionHandler:(void (^) (ADProfileInfo*, NSError*))completionBlock;
-{
-    SamplesApplicationData* data = [SamplesApplicationData getInstance];
-    
-    
-    ADAuthenticationError *error;
-    authContext = [ADAuthenticationContext authenticationContextWithAuthority:data.authority error:&error];
-    authContext.parentController = parent;
-    NSURL *redirectUri = [[NSURL alloc]initWithString:data.redirectUriString];
-    
-    if(!data.correlationId ||
-       [[data.correlationId stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0)
-    {
-        authContext.correlationId = [[NSUUID alloc] initWithUUIDString:data.correlationId];
-    }
-    
-    [ADAuthenticationSettings sharedInstance].enableFullScreen = data.fullScreen;
-    [authContext acquireTokenWithScopes:data.scopes
-                      additionalScopes: data.additionalScopes
-                              clientId:data.clientId
-                           redirectUri:redirectUri
-                            identifier:[ADUserIdentifier identifierWithId:data.userItem.profileInfo.username type:RequiredDisplayableId]
-                            promptBehavior:AD_PROMPT_ALWAYS
-                  extraQueryParameters: params.urlEncodedString
-                                policy: policy.policyID
-                       completionBlock:^(ADAuthenticationResult *result) {
-                           
-                           if (result.status != AD_SUCCEEDED)
-                           {
-                               completionBlock(nil, result.error);
-                           }                              else
-                              {
-                                  data.userItem = result.tokenCacheStoreItem;
-                                  completionBlock(result.tokenCacheStoreItem.profileInfo, nil);
-                              }
-                          }];
+[[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreDidFailToRequestAccessNotification
+                                                  object:[NXOAuth2AccountStore sharedStore]
+                                                   queue:nil
+                                              usingBlock:^(NSNotification *aNotification) {
+                                                  NSError *error = [aNotification.userInfo objectForKey:NXOAuth2AccountStoreErrorKey];
+                                                  NSLog(@"Error!! %@", error.localizedDescription);
+                                              }];
 }
 
 
@@ -442,16 +277,17 @@ completionBlock:(void (^) (bool, NSError* error)) completionBlock
 
 +(void) doPolicy:(samplesPolicyData *)policy
          parent:(UIViewController*) parent
-completionBlock:(void (^) (ADProfileInfo* userInfo, NSError* error)) completionBlock
+completionBlock:(void (^) (NSNotification* userInfo, NSError* error)) completionBlock
 {
 
         [self readApplicationSettings];
     
     NSDictionary* params = [self convertPolicyToDictionary:policy];
     
-    [self getClaimsWithPolicyClearingCache:NO policy:policy params:params parent:parent completionHandler:^(ADProfileInfo* userInfo, NSError* error) {
-        
-        if (userInfo == nil)
+
+    [self getTokenWithPolicy:NO policy:policy params:params parent:parent completionBlock:^(NSNotification* userInfo, NSError* error) {
+       
+       if (error != nil)
         {
             completionBlock(nil, error);
         }
@@ -464,31 +300,87 @@ completionBlock:(void (^) (ADProfileInfo* userInfo, NSError* error)) completionB
     
 }
 
-
-+(void) craftRequest : (NSString*)webApiUrlString
-               parent:(UIViewController*) parent
-    completionHandler:(void (^)(NSMutableURLRequest*, NSError* error))completionBlock
++(void) searchUserList:(NSString*)searchString
+       completionBlock:(void (^) (NSMutableArray* Users, NSError* error)) completionBlock
 {
-    [self getTokenClearingCache:NO parent:parent completionHandler:^(NSString* accessToken, NSError* error){
-        
-        if (accessToken == nil)
-        {
-            completionBlock(nil,error);
-        }
-        else
-        {
-            NSURL *webApiURL = [[NSURL alloc]initWithString:webApiUrlString];
-            
-            NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:webApiURL];
-            
-            NSString *authHeader = [NSString stringWithFormat:@"Bearer %@", accessToken];
-            
-            [request addValue:authHeader forHTTPHeaderField:@"Authorization"];
-            
-            completionBlock(request, nil);
-        }
-    }];
+    if (!loadedApplicationSettings)
+    {
+        [self readApplicationSettings];
+    }
+    
+    SamplesApplicationData* data = [SamplesApplicationData getInstance];
+    
+    NSString *taskURL = [NSString stringWithFormat:@"%@", data.taskWebApiUrlString];
+    
+    NXOAuth2AccountStore *store = [NXOAuth2AccountStore sharedStore];
+    NSDictionary* params = [self convertParamsToDictionary:searchString];
+    
+    NSArray *accounts = [store accountsWithAccountType:@"myB2CService"];
+    [NXOAuth2Request performMethod:@"GET"
+                        onResource:[NSURL URLWithString:taskURL]
+                   usingParameters:params
+                       withAccount:accounts[0]
+               sendProgressHandler:^(unsigned long long bytesSend, unsigned long long bytesTotal) {
+                   // e.g., update a progress indicator
+               }
+                   responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error) {
+                       // Process the response
+                       if (responseData) {
+                           NSError *error;
+                           NSDictionary *dataReturned = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
+                           NSLog(@"Graph Response was: %@", dataReturned);
+                           
+                           // We can grab the top most JSON node to get our graph data.
+                           NSArray *graphDataArray = [dataReturned objectForKey:@"value"];
+                           
+                           // Don't be thrown off by the key name being "value". It really is the name of the
+                           // first node. :-)
+                           
+                           //each object is a key value pair
+                           NSDictionary *keyValuePairs;
+                           NSMutableArray* Users = [[NSMutableArray alloc]init];
+                           
+                           for(int i =0; i < graphDataArray.count; i++)
+                           {
+                               keyValuePairs = [graphDataArray objectAtIndex:i];
+                               
+                               User *s = [[User alloc]init];
+                               s.upn = [keyValuePairs valueForKey:@"userPrincipalName"];
+                               s.name =[keyValuePairs valueForKey:@"displayName"];
+                               s.mail =[keyValuePairs valueForKey:@"mail"];
+                               s.businessPhones =[keyValuePairs valueForKey:@"businessPhones"];
+                               s.mobilePhones =[keyValuePairs valueForKey:@"mobilePhone"];
+                               
+                               
+                               [Users addObject:s];
+                           }
+                           
+                           completionBlock(Users, nil);
+                       }
+                       else
+                       {
+                           completionBlock(nil, error);
+                       }
+                       
+                   }];
 }
+
++(NSDictionary*) convertParamsToDictionary:(NSString*)searchString
+{
+    NSMutableDictionary* dictionary = [[NSMutableDictionary alloc]init];
+    
+    NSString *query = [NSString stringWithFormat:@"startswith(givenName, '%@')", searchString];
+    
+    [dictionary setValue:query forKey:@"$filter"];
+    
+    
+    
+    return dictionary;
+}
+
+
+
+
 
 // Here we have some converstion helpers that allow us to parse passed items in to dictionaries for URLEncoding later.
 
@@ -520,7 +412,8 @@ completionBlock:(void (^) (ADProfileInfo* userInfo, NSError* error)) completionB
 
 +(void) signOut
 {
-    [authContext.tokenCacheStore removeAll:nil];
+    for 
+    [[NXOAuth2AccountStore sharedStore]  removeAccount:account];
     
     NSHTTPCookie *cookie;
     

@@ -6,16 +6,11 @@
 //  Copyright © 2016 Microsoft. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "samplesPolicySelectorViewController.h"
 #import "samplesUserLoginViewController.h"
-#import "samplesWebAPIConnector.h"
-#import "samplesUseViewController.h"
-#import "samplesPolicyData.h"
-#import <Foundation/Foundation.h>
-#import "samplesTaskItem.h"
-#import "samplesPolicyData.h"
-#import "NXOAuth2.h"
 #import "samplesApplicationData.h"
+
 @interface samplesPolicySelectorViewController ()
 
 @end

@@ -18,6 +18,9 @@
 
 @property (strong) NSString* taskWebApiUrlString;
 @property (strong) NSString* authority;
+@property (strong) NSString* token;
+@property (strong) NSString* login;
+@property (strong) NSString* keychain;
 @property (strong) NSString* clientId;
 @property (strong) NSString* resourceId;
 @property NSMutableArray* scopes;
@@ -30,7 +33,6 @@
 @property BOOL fullScreen;
 @property BOOL showClaims;
 @property (strong) NSString* currentPolicyId;
-@property (strong) NSNotification* notification;
 
 +(id) getInstance;
 

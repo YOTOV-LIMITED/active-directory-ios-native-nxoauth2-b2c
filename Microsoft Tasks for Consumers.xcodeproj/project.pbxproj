@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7C830F7926DA8D3AF9CB99C6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F38096135D57D9DDDF18D89C /* libPods.a */; };
 		97C15AF41A27FDF0004A0419 /* SamplesSelectUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C15AF31A27FDF0004A0419 /* SamplesSelectUserViewController.m */; };
 		97C15AF71A280BEF004A0419 /* SamplesApplicationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C15AF61A280BEF004A0419 /* SamplesApplicationData.m */; };
 		97C15AFA1A29C9F3004A0419 /* SamplesAppSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C15AF91A29C9F3004A0419 /* SamplesAppSettingsController.m */; };
@@ -40,10 +39,8 @@
 		FB4C7C1B1BA08A66003B93C5 /* ADAL_iPad_Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB4C7C191BA08A66003B93C5 /* ADAL_iPad_Storyboard.storyboard */; };
 		FB538F2D1BA36653003ABD9A /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FB538F2C1BA36653003ABD9A /* TPKeyboardAvoidingScrollView.m */; };
 		FB538F301BA36875003ABD9A /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FB538F2F1BA36875003ABD9A /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
-		FB538F361BA38E63003ABD9A /* 10637393134_3be20f8467_k.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FB538F351BA38E63003ABD9A /* 10637393134_3be20f8467_k.jpg */; };
 		FB538F381BA39882003ABD9A /* signin-email.png in Resources */ = {isa = PBXBuildFile; fileRef = FB538F371BA39881003ABD9A /* signin-email.png */; };
 		FB538F3A1BA39887003ABD9A /* signin-fb.png in Resources */ = {isa = PBXBuildFile; fileRef = FB538F391BA39887003ABD9A /* signin-fb.png */; };
-		FB6ABBF91B9E807500AF7868 /* libADALiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB6ABBF81B9E807500AF7868 /* libADALiOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,7 +72,6 @@
 		B8D00A1E1ACE4DF800C842CC /* samplesUseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = samplesUseViewController.m; sourceTree = "<group>"; };
 		BE1BE405644A406563C93532 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CD3A1E7903044ED9B1D16952 /* Pods-Microsoft Tasks for Consumers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Microsoft Tasks for Consumers.release.xcconfig"; path = "Pods/Target Support Files/Pods-Microsoft Tasks for Consumers/Pods-Microsoft Tasks for Consumers.release.xcconfig"; sourceTree = "<group>"; };
-		F38096135D57D9DDDF18D89C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB0E76971D2709840081D3CF /* samplesPolicySelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = samplesPolicySelectorViewController.h; sourceTree = "<group>"; };
 		FB0E76981D2709840081D3CF /* samplesPolicySelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = samplesPolicySelectorViewController.m; sourceTree = "<group>"; };
 		FB33714818CA5B7E00234804 /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
@@ -107,10 +103,8 @@
 		FB538F2C1BA36653003ABD9A /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		FB538F2E1BA36875003ABD9A /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		FB538F2F1BA36875003ABD9A /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
-		FB538F351BA38E63003ABD9A /* 10637393134_3be20f8467_k.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 10637393134_3be20f8467_k.jpg; sourceTree = "<group>"; };
 		FB538F371BA39881003ABD9A /* signin-email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signin-email.png"; sourceTree = "<group>"; };
 		FB538F391BA39887003ABD9A /* signin-fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signin-fb.png"; sourceTree = "<group>"; };
-		FB6ABBF81B9E807500AF7868 /* libADALiOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libADALiOS.a; path = "../../SDKs/azure-activedirectory-library-for-objc/ADALiOS/build/Debug-iphoneos/libADALiOS.a"; sourceTree = "<group>"; };
 		FB7362EB1BA758820048374F /* samplesApplicationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = samplesApplicationData.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,12 +113,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB6ABBF91B9E807500AF7868 /* libADALiOS.a in Frameworks */,
 				FB3F00DC18C7016200173598 /* CoreGraphics.framework in Frameworks */,
 				FB3F00E018C7016200173598 /* CoreData.framework in Frameworks */,
 				FB3F00DE18C7016200173598 /* UIKit.framework in Frameworks */,
 				FB3F00DA18C7016200173598 /* Foundation.framework in Frameworks */,
-				7C830F7926DA8D3AF9CB99C6 /* libPods.a in Frameworks */,
 				B85C8C4E0F3070AD35DD5A13 /* libPods-Microsoft Tasks for Consumers.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,13 +156,11 @@
 		FB3F00D818C7016200173598 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FB6ABBF81B9E807500AF7868 /* libADALiOS.a */,
 				FB3F00D918C7016200173598 /* Foundation.framework */,
 				FB3F00DB18C7016200173598 /* CoreGraphics.framework */,
 				FB3F00DD18C7016200173598 /* UIKit.framework */,
 				FB3F00DF18C7016200173598 /* CoreData.framework */,
 				FB3F00F718C7016200173598 /* XCTest.framework */,
-				F38096135D57D9DDDF18D89C /* libPods.a */,
 				B16B55E9D29C978A32C96120 /* libPods-Microsoft Tasks for Consumers.a */,
 			);
 			name = Frameworks;
@@ -216,7 +206,6 @@
 				B81583EC1AD318CB00CCA892 /* NSDictionary+UrlEncoding.h */,
 				FB538F371BA39881003ABD9A /* signin-email.png */,
 				FB538F391BA39887003ABD9A /* signin-fb.png */,
-				FB538F351BA38E63003ABD9A /* 10637393134_3be20f8467_k.jpg */,
 				FB538F2E1BA36875003ABD9A /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
 				FB538F2F1BA36875003ABD9A /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
 				FB538F2B1BA36653003ABD9A /* TPKeyboardAvoidingScrollView.h */,
@@ -319,7 +308,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8D009CC1ACDBD3A00C842CC /* InfoPlist.strings in Resources */,
-				FB538F361BA38E63003ABD9A /* 10637393134_3be20f8467_k.jpg in Resources */,
 				FB3BF23518D03A88007E645E /* Main_iPhone.storyboard in Resources */,
 				FB3F00F118C7016200173598 /* Images.xcassets in Resources */,
 				FB538F3A1BA39887003ABD9A /* signin-fb.png in Resources */,
@@ -501,10 +489,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Microsoft Tasks/Microsoft Tasks-Prefix.pch";
 				INFOPLIST_FILE = "Microsoft Tasks/Microsoft Tasks-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -532,10 +521,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Microsoft Tasks/Microsoft Tasks-Prefix.pch";
 				INFOPLIST_FILE = "Microsoft Tasks/Microsoft Tasks-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",

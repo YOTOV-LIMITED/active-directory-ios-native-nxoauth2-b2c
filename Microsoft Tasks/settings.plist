@@ -2,8 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>authority</key>
-	<string>https://login.microsoftonline.com/hypercubeb2c.onmicrosoft.com/</string>
+	<key>tokenURL</key>
+	<string>https://login.microsoftonline.com/common/oauth2/v2.0/token</string>
+	<key>loginURL</key>
+	<string>https://login.microsoftonline.com/common/login</string>
+	<key>authorityURL</key>
+	<string>https://login.microsoftonline.com/common/oauth2/v2.0/authorize</string>
 	<key>clientId</key>
 	<string>7bf688ce-8139-4ca8-9391-02fdb6f86d67</string>
 	<key>scopes</key>
@@ -30,5 +34,7 @@
 	<false/>
 	<key>showClaims</key>
 	<true/>
+	<key>keyChain</key>
+	<string>com.microsoft.azureactivedirectory.samples.graph.QuickStart</string>
 </dict>
 </plist>

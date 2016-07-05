@@ -96,11 +96,11 @@
     
     
     
-    [samplesWebAPIConnector doPolicy:aPolicy parent:self completionBlock:^(ADProfileInfo* userInfo, NSError* error) {
+    [samplesWebAPIConnector loginWithPolicy:aPolicy parent:self completionBlock:^(NSNotification* userInfo, NSError* error) {
         if (userInfo)
         {
             samplesUseViewController* claimsController = [self.storyboard instantiateViewControllerWithIdentifier:@"ClaimsView"];
-            claimsController.claims = [NSString stringWithFormat:@" Claims : %@", userInfo.allClaims];
+            claimsController.claims = [NSString stringWithFormat:@" Claims : %@", userInfo];
             [self.navigationController pushViewController:claimsController animated:YES];
         }
         

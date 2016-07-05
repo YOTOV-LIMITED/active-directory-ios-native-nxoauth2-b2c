@@ -7,28 +7,16 @@
 //
 
 #import "samplesUserLoginViewController.h"
-#import "samplesWebAPIConnector.h"
 #import "samplesUseViewController.h"
-#import "samplesPolicyData.h"
-#import <Foundation/Foundation.h>
-#import "samplesTaskItem.h"
-#import "samplesPolicyData.h"
 #import "NXOAuth2.h"
 #import "samplesApplicationData.h"
 
 
 @implementation samplesUserLoginViewController
 
-NSString *scopes = @"openid";
-NSString *authURL = @"https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
-NSString *loginURL = @"https://login.microsoftonline.com/common/login";
-NSString *bhh = @"urn:ietf:wg:oauth:2.0:oob?code=";
-NSString *tokenURL = @"https://login.microsoftonline.com/common/oauth2/v2.0/token";
-NSString *keychain = @"com.microsoft.azureactivedirectory.samples.graph.QuickStart";
 static NSString * const kIDMOAuth2SuccessPagePrefix = @"session_state=";
 NSURL *myRequestedUrl;
 NSURL *myLoadedUrl;
-bool loginFlow = FALSE;
 bool isRequestBusy;
 NSURL *authcode;
 
@@ -47,6 +35,7 @@ NSURL *authcode;
 }
 
 - (void)resolveUsingUIWebView:(NSURL *)URL {
+    
     
     // We get the auth token from a redirect so we need to handle that in the webview.
     
@@ -69,15 +58,17 @@ NSURL *authcode;
     // The webview is where all the communication happens. Slightly complicated.
     
     myLoadedUrl = [webView.request mainDocumentURL];
+    SamplesApplicationData* data = [SamplesApplicationData getInstance];
+    NSString *redirectURL = [NSString stringWithFormat:@"%@?code=", data.redirectUriString];
     NSLog(@"***Loaded url: %@", myLoadedUrl);
     
     //if the UIWebView is showing our authorization URL or consent URL, show the UIWebView control
-    if ([request.URL.absoluteString rangeOfString:authURL options:NSCaseInsensitiveSearch].location != NSNotFound) {
+    if ([request.URL.absoluteString rangeOfString:data.authority options:NSCaseInsensitiveSearch].location != NSNotFound) {
         self.loginView.hidden = NO;
-    } else if ([request.URL.absoluteString rangeOfString:loginURL options:NSCaseInsensitiveSearch].location != NSNotFound) {
+    } else if ([request.URL.absoluteString rangeOfString:data.login options:NSCaseInsensitiveSearch].location != NSNotFound) {
         //otherwise hide the UIWebView, we've left the authorization flow
         self.loginView.hidden = NO;
-    } else if ([request.URL.absoluteString rangeOfString:bhh options:NSCaseInsensitiveSearch].location != NSNotFound) {
+    } else if ([request.URL.absoluteString rangeOfString:redirectURL options:NSCaseInsensitiveSearch].location != NSNotFound) {
         //otherwise hide the UIWebView, we've left the authorization flow
         self.loginView.hidden = YES;
         [[NXOAuth2AccountStore sharedStore] handleRedirectURL:request.URL];
@@ -118,6 +109,21 @@ NSURL *authcode;
 }
 */
 
+- (void)handleOAuth2AccessResult:(NSString *)accessResult {
+    
+    SamplesApplicationData* data = [SamplesApplicationData getInstance];
+    
+    //parse the response for success or failure
+    if (accessResult)
+        //if success, complete the OAuth2 flow by handling the redirect URL and obtaining a token
+    {
+        [[NXOAuth2AccountStore sharedStore] handleRedirectURL:accessResult];
+    } else {
+        //start over
+        [self requestOAuth2Access];
+    }
+}
+
 - (void)setupOAuth2AccountStore {
     
 
@@ -129,6 +135,8 @@ NSURL *authcode;
     
   //  authURL = [NSString stringWithFormat:@"%@", authURL, data.graphApiUrlString, data.apiversion];
     
+        NSString *redirectURL = [NSString stringWithFormat:@"%@?code=", data.redirectUriString];
+    
     NSMutableDictionary *configuration = [NSMutableDictionary dictionaryWithDictionary:[[NXOAuth2AccountStore sharedStore] configurationForAccountType:@"myB2CService"]];
     NSDictionary *customHeaderFields = [NSDictionary dictionaryWithObject:data.currentPolicyId forKey:@"p"];
     [configuration setObject:customHeaderFields forKey:kNXOAuth2AccountStoreConfigurationAdditionalAuthenticationParameters];
@@ -137,11 +145,11 @@ NSURL *authcode;
     
     [[NXOAuth2AccountStore sharedStore] setClientID:data.clientId
                                              secret:nil
-                                              scope:[NSSet setWithObject:scopes]
-                                   authorizationURL:[NSURL URLWithString:authURL]
-                                           tokenURL:[NSURL URLWithString:tokenURL]
-                                        redirectURL:[NSURL URLWithString:data.redirectUriString]
-                                      keyChainGroup: keychain
+                                              scope:[NSSet setWithObject:data.scopes]
+                                   authorizationURL:[NSURL URLWithString:data.authority]
+                                           tokenURL:[NSURL URLWithString:data.token]
+                                        redirectURL:[NSURL URLWithString:redirectURL]
+                                      keyChainGroup: data.keychain
                                      forAccountType:@"myB2CService"];
     
     [[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreAccountsDidChangeNotification
@@ -176,7 +184,7 @@ NSURL *authcode;
 
 -(void)requestOAuth2Access {
     //in order to login to Mircosoft APIs using OAuth2 we must show an embedded browser (UIWebView)
-    [[NXOAuth2AccountStore sharedStore] requestAccessToAccountWithType:@"myGraphService"
+    [[NXOAuth2AccountStore sharedStore] requestAccessToAccountWithType:@"myB2CService"
                                    withPreparedAuthorizationURLHandler:^(NSURL *preparedURL) {
                                        //navigate to the URL returned by NXOAuth2Client
                                        

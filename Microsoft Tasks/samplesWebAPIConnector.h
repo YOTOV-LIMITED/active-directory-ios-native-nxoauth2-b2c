@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "samplesTaskItem.h"
 #import "samplesPolicyData.h"
-#import "NXOAuth2.h"
 
 @interface samplesWebAPIConnector : NSObject<NSURLConnectionDataDelegate>
 
@@ -24,7 +23,7 @@ completionBlock:(void (^) (bool, NSError* error)) completionBlock;
             parent:(UIViewController*) parent
    completionBlock:(void (^) (bool, NSError* error)) completionBlock;
 
-+(void) doPolicy:(samplesPolicyData*)policy
++(void) loginWithPolicy:(samplesPolicyData*)policy
          parent:(UIViewController*) parent
 completionBlock:(void (^) (NSNotification* userinfo, NSError* error)) completionBlock;
 

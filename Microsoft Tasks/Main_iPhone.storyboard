@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11129.15" systemVersion="16A201w" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="j3i-L0-Zqe">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11129.15" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="j3i-L0-Zqe">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11103.10"/>
@@ -69,7 +69,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RBS-Ot-NYG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="158" y="-445"/>
+            <point key="canvasLocation" x="-497" y="-445"/>
         </scene>
         <!--Add New Task-->
         <scene sceneID="dff-cz-dcj">
@@ -113,7 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="61U-2j-oWA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1124" y="-469"/>
+            <point key="canvasLocation" x="120" y="-445"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uX0-JS-am8">
@@ -137,7 +137,7 @@
         <!--Get Started-->
         <scene sceneID="Jte-63-8gO">
             <objects>
-                <viewController storyboardIdentifier="LoginUserView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="80e-F7-zNi" customClass="samplesPolicySelectorViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginProfileSelector" useStoryboardIdentifierAsRestorationIdentifier="YES" id="80e-F7-zNi" customClass="samplesPolicySelectorViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FPb-NC-hhc"/>
                         <viewControllerLayoutGuide type="bottom" id="OrS-ky-xMy"/>
@@ -204,13 +204,7 @@
                             <constraint firstItem="p05-Vv-JDG" firstAttribute="leading" secondItem="hvR-ro-JcE" secondAttribute="leadingMargin" constant="4" id="xux-fT-bdm"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Get Started" id="50Q-df-4Zc">
-                        <barButtonItem key="rightBarButtonItem" title="Settings" id="oHT-DG-Isr">
-                            <connections>
-                                <segue destination="hf6-a4-gzu" kind="push" id="DB3-AS-gES"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Get Started" id="50Q-df-4Zc"/>
                     <connections>
                         <outlet property="emailLogin" destination="3Av-3T-P3o" id="DwY-hD-jFi"/>
                         <outlet property="fbLogin" destination="Iys-Rb-uZR" id="sQe-ss-E4P"/>
@@ -220,7 +214,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OQ1-8q-naM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="614" y="603"/>
+            <point key="canvasLocation" x="41" y="508"/>
         </scene>
         <!--Settings-->
         <scene sceneID="5KC-nG-aka">
@@ -276,7 +270,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tim-Zt-JYZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-48" y="818"/>
+            <point key="canvasLocation" x="-498" y="508"/>
         </scene>
         <!--Samples User Login View Controller-->
         <scene sceneID="f5x-eZ-DbX">
@@ -309,7 +303,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CUC-GK-bsQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1039.5" y="599.5"/>
+            <point key="canvasLocation" x="487" y="516"/>
         </scene>
         <!--Claims View-->
         <scene sceneID="FZY-ex-Sqw">
@@ -353,7 +347,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMf-DT-rAz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1482" y="600"/>
+            <point key="canvasLocation" x="915" y="516"/>
         </scene>
         <!--Samples App Settings Controller-->
         <scene sceneID="V0I-4S-I30">
@@ -545,7 +539,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YSF-U4-Bcq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="34" y="1779"/>
+            <point key="canvasLocation" x="-482" y="1347"/>
         </scene>
     </scenes>
     <resources>
@@ -557,7 +551,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="DB3-AS-gES"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -9,13 +9,13 @@
 #import "samplesTaskListTableViewController.h"
 #import "samplesTaskItem.h"
 #import "sampleAddTaskItemViewController.h"
-#import "samplesWebAPIConnector.h"
-#import "SamplesSelectUserViewController.h"
+#import "samplesPolicySelectorViewController.h"
 #import <Foundation/Foundation.h>
 #import "samplesTaskItem.h"
 #import "samplesPolicyData.h"
 #import "samplesApplicationData.h"
 #import "NXOAuth2.h"
+#import "samplesWebAPIConnector.h"
 
 
 @interface samplesTaskListTableViewController ()
@@ -32,14 +32,19 @@
     
     
     NXOAuth2AccountStore *store = [NXOAuth2AccountStore sharedStore];
-    NSArray *accounts = [store accountsWithAccountType:@"myGraphService"];
+    NSArray *accounts = [store accountsWithAccountType:@"myB2CService"];
     
-    if (accounts.count == 0) {
+    if (accounts == nil || [accounts count] == 0) {
         
         dispatch_async(dispatch_get_main_queue(),^ {
             
-            SamplesSelectUserViewController* userSelectController = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginUserView"];
-            [self.navigationController pushViewController:userSelectController animated:YES];
+            
+            samplesPolicySelectorViewController* userSelectController = [self.storyboard
+                instantiateViewControllerWithIdentifier:@"LoginProfileSelector"];
+            [self.navigationController pushViewController:userSelectController animated:NO];
+
+            
+
         });
     }
 
@@ -72,7 +77,7 @@
             // Refresh main thread since we are async
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
-                if(accounts.count)
+                if(accounts.count > 0)
                 {
                     [self.userLabel setText:@"Hi"];
                 }
@@ -85,18 +90,6 @@
     } parent:self];
     } }
 
-- (IBAction)switchUserPressed:(id)sender {
-    
-    [samplesWebAPIConnector signOut];
-    [self.taskItems removeAllObjects];
-    
-    // Refresh main thread since we are async
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
-    });
-    
-    [self loadData];
-}
 
 - (void)viewDidLoad
 {
@@ -117,18 +110,20 @@
     NXOAuth2AccountStore *store = [NXOAuth2AccountStore sharedStore];
     NSArray *accounts = [store accountsWithAccountType:@"myB2CService"];
     
-    if(data.notification.userInfo)
+    if(accounts.count > 0)
     {
         [self loadData];
     }
     
-    if(accounts.count)
+    if(accounts.count > 0)
     {
         [self.userLabel setText:@"Hello"];    }
     else
     {
         [self.userLabel setText:@"N/A" ];
     }
+    
+    
 }
 
 

@@ -18,8 +18,11 @@
         NSString* sc = [dictionary objectForKey:@"showClaims"];
         instance.fullScreen = [va boolValue];
         instance.showClaims = [sc boolValue];
+        instance.token = [dictionary objectForKey:@"tokenURL"];
+        instance.login = [dictionary objectForKey:@"loginURL"];
+        instance.keychain = [dictionary objectForKey:@"keyChain"];
         instance.clientId = [dictionary objectForKey:@"clientId"];
-        instance.authority = [dictionary objectForKey:@"authority"];
+        instance.authority = [dictionary objectForKey:@"authorityURL"];
         instance.resourceId = [dictionary objectForKey:@"resourceString"];
         instance.scopes = [[NSMutableArray alloc]initWithArray:[dictionary objectForKey:@"scopes"]];
         instance.additionalScopes = [dictionary objectForKey:@"additionalScopes"];
@@ -29,7 +32,6 @@
         instance.faceBookSignInPolicyId = [dictionary objectForKey:@"faceBookSignInPolicyId"];
         instance.emailSignInPolicyId = [dictionary objectForKey:@"emailSignInPolicyId"];
         instance.currentPolicyId = nil;
-        instance.notification = nil;
         
     });
     

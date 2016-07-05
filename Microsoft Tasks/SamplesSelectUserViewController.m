@@ -1,11 +1,8 @@
 #import "SamplesSelectUserViewController.h"
-#import <ADALiOS/ADAuthenticationSettings.h>
-#import "ADALiOS/ADAuthenticationContext.h"
 #import "samplesUserLoginViewController.h"
 #import <Foundation/Foundation.h>
 #import "samplesTaskItem.h"
 #import "samplesPolicyData.h"
-#import "ADALiOS/ADAuthenticationResult.h"
 #import "samplesApplicationData.h"
 
 @interface SamplesSelectUserViewController ()
@@ -34,43 +31,22 @@
 
 -(void) loadData
 {
-    ADAuthenticationError* error;
-    id<ADTokenCacheStoring> cache = [ADAuthenticationSettings sharedInstance].defaultTokenCacheStore;
-    NSArray* array = [cache allItems:&error];
-    if (error)
-    {
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:[[NSString alloc]initWithFormat:@"%@", error.errorDetails] delegate:nil cancelButtonTitle:@"Retry" otherButtonTitles:@"Cancel", nil];
-        
-        [alertView setDelegate:self];
-        
-        dispatch_async(dispatch_get_main_queue(),^ {
-            [alertView show];
-        });
-    } else
-    {
-        NSMutableSet* users = [NSMutableSet new];
+    
         self.userList = [NSMutableArray new];
-        for(ADTokenCacheStoreItem* item in array)
+        for (NXOAuth2Account *account in [[NXOAuth2AccountStore sharedStore] accounts])
         {
-            ADProfileInfo *user = item.profileInfo;
-            if (!item.profileInfo)
-            {
-                user = [ADProfileInfo profileInfoWithUsername:@"Unknown user" error:nil];
-            }
-            if (![users containsObject:user.username])
-            {
+            
                 //New user, add and print:
-                [self.userList addObject:item];
-                [users addObject:user.username];
-            }
+                [self.userList addObject:account.userData];
+
         }
-        
+    
         // Refresh main thread since we are async
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
     }
-}
+
 
 - (IBAction)cancelPressed:(id)sender
 {
@@ -126,12 +102,12 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserPrototypeCell" forIndexPath:indexPath];
     
-    ADTokenCacheStoreItem *userItem = [self.userList objectAtIndex:indexPath.row];
+    NXOAuth2Account *userItem = [self.userList objectAtIndex:indexPath.row];
     if(userItem)
     {
-        if(userItem.profileInfo){
+        if(userItem.userData){
             
-            cell.textLabel.text = userItem.profileInfo.username;
+            cell.textLabel.text = userItem.userData;
         }
         else
         {
@@ -153,94 +129,13 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    ADTokenCacheStoreItem *userItem = [self.userList objectAtIndex:indexPath.row];
-    [self getToken:userItem];
+  //  ADTokenCacheStoreItem *userItem = [self.userList objectAtIndex:indexPath.row];
+  //  [self getToken:userItem];
     
     //tappedItem.completed = !tappedItem.completed;
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
-- (void) getToken:(ADTokenCacheStoreItem*) userItem
-{
-    SamplesApplicationData* appData = [SamplesApplicationData getInstance];
-    ADAuthenticationError *error;
-    ADAuthenticationContext* authContext = [ADAuthenticationContext authenticationContextWithAuthority:appData.authority validateAuthority:NO error:&error];
-    NSString* userId = nil;
-    
-    if(userItem && userItem.profileInfo){
-        if(userItem.profileInfo.username){
-            userId = userItem.profileInfo.username;
-        }
-    }
-    
-    authContext.parentController = self;
-    [ADAuthenticationSettings sharedInstance].enableFullScreen = appData.fullScreen;
-    NSURL *redirectUri = [[NSURL alloc]initWithString:appData.redirectUriString];
-    
-    if(!appData.correlationId ||
-       [[appData.correlationId stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0)
-    {
-        authContext.correlationId = [[NSUUID alloc] initWithUUIDString:appData.correlationId];
-    }
-    
-
-    if(!userItem){
-    
-    NSURL *redirectUri = [[NSURL alloc]initWithString:appData.redirectUriString];
-        [authContext acquireTokenSilentWithScopes:appData.scopes
-                                        clientId:appData.clientId
-                                     redirectUri:redirectUri
-                                      identifier:[ADUserIdentifier identifierWithId:userId type:RequiredDisplayableId]
-                                   promptBehavior:AD_CREDENTIALS_AUTO
-                          completionBlock:^(ADAuthenticationResult *result) {
-                              
-                              if (result.status != AD_SUCCEEDED)
-                              {
-                                  UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:[[NSString alloc]initWithFormat:@"Error : %@", result.error] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-                                  
-                                  [alertView setDelegate:self];
-                                  
-                                  dispatch_async(dispatch_get_main_queue(),^ {
-                                      [alertView show];
-                                  });
-                              }
-                              else
-                              {
-                                  SamplesApplicationData* data = [SamplesApplicationData getInstance];
-                                  data.userItem = result.tokenCacheStoreItem;
-                                  [self cancelPressed:self];
-                              }
-                          }];
-    } else {
-        
-        [authContext acquireTokenSilentWithScopes:appData.scopes
-                                        clientId:appData.clientId
-                                     redirectUri:redirectUri
-                                      identifier:[ADUserIdentifier identifierWithId:userId type:RequiredDisplayableId]
-                                    promptBehavior:AD_CREDENTIALS_AUTO
-                                 completionBlock:^(ADAuthenticationResult *result) {
-            
-            if (result.status != AD_SUCCEEDED)
-            {
-                UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:[[NSString alloc]initWithFormat:@"Error : %@", result.error] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-                
-                [alertView setDelegate:self];
-                
-                dispatch_async(dispatch_get_main_queue(),^ {
-                    [alertView show];
-                });
-            }
-            else
-            {
-                SamplesApplicationData* data = [SamplesApplicationData getInstance];
-                data.userItem = result.tokenCacheStoreItem;
-                [self cancelPressed:self];
-            }
-        }];
-
-        
-    }
-}
 
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

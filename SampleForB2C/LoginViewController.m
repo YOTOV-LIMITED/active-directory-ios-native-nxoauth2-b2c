@@ -17,12 +17,12 @@
 @implementation LoginViewController
 
 
-NSString *cleintID = @"1fa27018-1a49-4521-851d-76004cb66ad8";
+NSString *clientID = @"4d9bece7-188e-40f6-9edf-5c44f3a8ae0d";
 NSString *clientSecret = @"";
-NSString *authURL = @"https://login.microsoftonline.com/kidventusb2c.onmicrosoft.com/oauth2/v2.0/authorize";
-NSString *loginURL = @"https://login.microsoftonline.com/kidventusb2c.onmicrosoft.com/login";
-NSString *bhh = @"urn:ietf:wg:oauth:2.0:oob";
-NSString *tokenURL = @"https://login.microsoftonline.com/kidventusb2c.onmicrosoft.com/oauth2/v2.0/token";
+NSString *authURL = @"https://login.microsoftonline.com/te/kidventusb2c.onmicrosoft.com/b2c_1_facebook/oauth2/v2.0/authorize";
+NSString *loginURL = @"https://login.microsoftonline.com/te/kidventusb2c.onmicrosoft.com/b2c_1_facebook/oauth2/v2.0/login";
+NSString *bhh = @"https://login.microsoftonline.com/common/oauth2/nativeclient";
+NSString *tokenURL = @"https://login.microsoftonline.com/te/kidventusb2c.onmicrosoft.com/b2c_1_facebook/oauth2/v2.0/token";
 NSString *keychain = @"com.microsoft.azureactivedirectory.samples.graph.QuickStart";
 NSString *signupPolicy = @"B2C_1_facebook";
 NSString *contentType = @"application/x-www-form-urlencoded";
@@ -137,20 +137,22 @@ NSURL *authcode;
 
 - (void)setupOAuth2AccountStore {
     
+
     NSDictionary *customAuthenticationParameters = [NSDictionary dictionaryWithObject:signupPolicy forKey:@"p"];
     NSDictionary *customHeaders = [NSDictionary dictionaryWithObject:contentType forKey:@"Content-type"];
     
     // Azure B2C needs kNXOAuth2AccountStoreConfigurationAdditionalAuthenticationParameters for sending policy to the server,
     // therefore we use -setConfiguration:forAccountType:
-    NSDictionary *B2cConfigDict = @{ kNXOAuth2AccountStoreConfigurationClientID: cleintID,
-                                        kNXOAuth2AccountStoreConfigurationSecret: clientSecret,
-                                        kNXOAuth2AccountStoreConfigurationScope: [NSSet setWithObjects:@"openid",@"offline_access", nil],
-                                        kNXOAuth2AccountStoreConfigurationAuthorizeURL: [NSURL URLWithString:authURL],
-                                        kNXOAuth2AccountStoreConfigurationTokenURL: [NSURL URLWithString:tokenURL],
-                                        kNXOAuth2AccountStoreConfigurationRedirectURL: [NSURL URLWithString:bhh],
-                                        kNXOAuth2AccountStoreConfigurationCustomHeaderFields: customHeaders,
-                                        kNXOAuth2AccountStoreConfigurationAdditionalAuthenticationParameters:customAuthenticationParameters };
-    
+    NSDictionary *B2cConfigDict = @{ kNXOAuth2AccountStoreConfigurationClientID: clientID,
+                                     kNXOAuth2AccountStoreConfigurationSecret: clientSecret,
+                                     kNXOAuth2AccountStoreConfigurationScope: [NSSet setWithObjects:@"openid",@"offline_access", nil],
+                                     kNXOAuth2AccountStoreConfigurationAuthorizeURL: [NSURL URLWithString:authURL],
+                                     kNXOAuth2AccountStoreConfigurationTokenURL: [NSURL URLWithString:tokenURL],
+                                     kNXOAuth2AccountStoreConfigurationRedirectURL: [NSURL URLWithString:bhh],
+                                     kNXOAuth2AccountStoreConfigurationCustomHeaderFields: customHeaders,
+                                    // kNXOAuth2AccountStoreConfigurationAdditionalAuthenticationParameters:customAuthenticationParameters
+                                     };
+
     [[NXOAuth2AccountStore sharedStore] setConfiguration:B2cConfigDict
                                           forAccountType:@"myB2CService"];
     

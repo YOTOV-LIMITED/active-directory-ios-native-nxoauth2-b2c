@@ -19,10 +19,10 @@
 
 NSString *clientID = @"4d9bece7-188e-40f6-9edf-5c44f3a8ae0d";
 NSString *clientSecret = @"";
-NSString *authURL = @"https://login.microsoftonline.com/te/kidventusb2c.onmicrosoft.com/b2c_1_facebook/oauth2/v2.0/authorize";
-NSString *loginURL = @"https://login.microsoftonline.com/te/kidventusb2c.onmicrosoft.com/b2c_1_facebook/oauth2/v2.0/login";
-NSString *bhh = @"https://login.microsoftonline.com/common/oauth2/nativeclient";
-NSString *tokenURL = @"https://login.microsoftonline.com/te/kidventusb2c.onmicrosoft.com/b2c_1_facebook/oauth2/v2.0/token";
+NSString *authURL = @"https://login.microsoftonline.com/kidventusb2c.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_facebook";
+NSString *loginURL = @"https://login.microsoftonline.com/kidventusb2c.onmicrosoft.com/login";
+NSString *bhh = @"urn:ietf:wg:oauth:2.0:oob";
+NSString *tokenURL = @"https://login.microsoftonline.com/kidventusb2c.onmicrosoft.com/oauth2/v2.0/token?p=B2C_1_facebook";
 NSString *keychain = @"com.microsoft.azureactivedirectory.samples.graph.QuickStart";
 NSString *signupPolicy = @"B2C_1_facebook";
 NSString *contentType = @"application/x-www-form-urlencoded";
@@ -150,7 +150,7 @@ NSURL *authcode;
                                      kNXOAuth2AccountStoreConfigurationTokenURL: [NSURL URLWithString:tokenURL],
                                      kNXOAuth2AccountStoreConfigurationRedirectURL: [NSURL URLWithString:bhh],
                                      kNXOAuth2AccountStoreConfigurationCustomHeaderFields: customHeaders,
-                                    // kNXOAuth2AccountStoreConfigurationAdditionalAuthenticationParameters:customAuthenticationParameters
+                               //      kNXOAuth2AccountStoreConfigurationAdditionalAuthenticationParameters:customAuthenticationParameters
                                      };
 
     [[NXOAuth2AccountStore sharedStore] setConfiguration:B2cConfigDict

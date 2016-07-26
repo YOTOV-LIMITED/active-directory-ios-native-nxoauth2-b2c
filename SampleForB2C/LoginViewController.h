@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LoginViewController : UIViewController <UIWebViewDelegate>
-@property (weak, nonatomic) IBOutlet UIWebView *loginView;
+@property(weak, nonatomic) IBOutlet UIWebView *loginView;
 
 - (void)handleOAuth2AccessResult:(NSURL *)accessResult;
 - (void)setupOAuth2AccountStore;

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>accountIdentifier</key>
+	<string>B2C_Acccount</string>
+	<key>clientID</key>
+	<string>90c0fe63-bcf2-44d5-8fb7-b8bbc0b29dc6</string>
+	<key>clientSecret</key>
+	<string></string>
+	<key>authURL</key>
+	<string>https://login.microsoftonline.com/fabrikamb2c.onmicrosoft.com/oauth2/v2.0/authorize?p=b2c_1_susi</string>
+	<key>loginURL</key>
+	<string>https://login.microsoftonline.com/fabrikamb2c.onmicrosoft.com/login</string>
+	<key>bhh</key>
+	<string>urn:ietf:wg:oauth:2.0:oob</string>
+	<key>tokenURL</key>
+	<string>https://login.microsoftonline.com/fabrikamb2c.onmicrosoft.com/oauth2/v2.0/token?p=b2c_1_susi</string>
+	<key>keychain</key>
+	<string>com.microsoft.azureactivedirectory.samples.graph.QuickStart</string>
+	<key>contentType</key>
+	<string>application/x-www-form-urlencoded</string>
+	<key>taskAPI</key>
+	<string>https://aadb2cplayground.azurewebsites.net</string>
+	<key>kIDMOAuth2SuccessPagePrefix</key>
+	<string>session_state=</string>
+</dict>
+</plist>

@@ -52,7 +52,7 @@
         jsonDict = dict;
     }
     NSString *expiresIn = [jsonDict objectForKey:@"expires_in"];
-    NSString *anAccessToken = [jsonDict objectForKey:@"id_token"];
+    NSString *anAccessToken = [jsonDict objectForKey:@"access_token"];
     NSString *aRefreshToken = [jsonDict objectForKey:@"refresh_token"];
     NSString *scopeString = [jsonDict objectForKey:@"scope"];
     

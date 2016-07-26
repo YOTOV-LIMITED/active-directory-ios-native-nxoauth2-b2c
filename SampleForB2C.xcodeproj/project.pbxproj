@@ -18,6 +18,11 @@
 		FB3F9EEA1D2B0D8F00743791 /* SampleForB2CTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3F9EE91D2B0D8F00743791 /* SampleForB2CTests.m */; };
 		FB3F9EF51D2B0D8F00743791 /* SampleForB2CUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3F9EF41D2B0D8F00743791 /* SampleForB2CUITests.m */; };
 		FB3F9F041D2B0E1F00743791 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3F9F031D2B0E1F00743791 /* LoginViewController.m */; };
+		FB4DCF5B1D47F05B0064FA5C /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4DCF5A1D47F05B0064FA5C /* AddTaskViewController.m */; };
+		FBE7F7941D46AE2D00437192 /* GraphAPICaller.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE7F7931D46AE2D00437192 /* GraphAPICaller.m */; };
+		FBE7F7971D46B14100437192 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE7F7961D46B14100437192 /* Task.m */; };
+		FBE7F7991D46EE5600437192 /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBE7F7981D46EE5600437192 /* settings.plist */; };
+		FBE7F79C1D46EF2300437192 /* AppData.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE7F79B1D46EF2300437192 /* AppData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +66,15 @@
 		FB3F9EF61D2B0D8F00743791 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB3F9F021D2B0E1F00743791 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		FB3F9F031D2B0E1F00743791 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		FB4DCF591D47F05B0064FA5C /* AddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskViewController.h; sourceTree = "<group>"; };
+		FB4DCF5A1D47F05B0064FA5C /* AddTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskViewController.m; sourceTree = "<group>"; };
+		FBE7F7921D46AE2D00437192 /* GraphAPICaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphAPICaller.h; sourceTree = "<group>"; };
+		FBE7F7931D46AE2D00437192 /* GraphAPICaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphAPICaller.m; sourceTree = "<group>"; };
+		FBE7F7951D46B14100437192 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Task.h; path = ../Task.h; sourceTree = "<group>"; };
+		FBE7F7961D46B14100437192 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Task.m; path = ../Task.m; sourceTree = "<group>"; };
+		FBE7F7981D46EE5600437192 /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
+		FBE7F79A1D46EF2300437192 /* AppData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppData.h; sourceTree = "<group>"; };
+		FBE7F79B1D46EF2300437192 /* AppData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +145,8 @@
 		FB3F9ECB1D2B0D8F00743791 /* SampleForB2C */ = {
 			isa = PBXGroup;
 			children = (
+				FBE7F7951D46B14100437192 /* Task.h */,
+				FBE7F7961D46B14100437192 /* Task.m */,
 				FB3F9ECF1D2B0D8F00743791 /* AppDelegate.h */,
 				FB3F9ED01D2B0D8F00743791 /* AppDelegate.m */,
 				FB3F9ED21D2B0D8F00743791 /* MasterViewController.h */,
@@ -144,6 +160,12 @@
 				FB3F9ECC1D2B0D8F00743791 /* Supporting Files */,
 				FB3F9F021D2B0E1F00743791 /* LoginViewController.h */,
 				FB3F9F031D2B0E1F00743791 /* LoginViewController.m */,
+				FBE7F7921D46AE2D00437192 /* GraphAPICaller.h */,
+				FBE7F7931D46AE2D00437192 /* GraphAPICaller.m */,
+				FBE7F79A1D46EF2300437192 /* AppData.h */,
+				FBE7F79B1D46EF2300437192 /* AppData.m */,
+				FB4DCF591D47F05B0064FA5C /* AddTaskViewController.h */,
+				FB4DCF5A1D47F05B0064FA5C /* AddTaskViewController.m */,
 			);
 			path = SampleForB2C;
 			sourceTree = "<group>";
@@ -152,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				FB3F9ECD1D2B0D8F00743791 /* main.m */,
+				FBE7F7981D46EE5600437192 /* settings.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -282,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB3F9EDF1D2B0D8F00743791 /* LaunchScreen.storyboard in Resources */,
+				FBE7F7991D46EE5600437192 /* settings.plist in Resources */,
 				FB3F9EDC1D2B0D8F00743791 /* Assets.xcassets in Resources */,
 				FB3F9EDA1D2B0D8F00743791 /* Main.storyboard in Resources */,
 			);
@@ -356,11 +380,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBE7F7971D46B14100437192 /* Task.m in Sources */,
 				FB3F9ED11D2B0D8F00743791 /* AppDelegate.m in Sources */,
 				FB3F9ED41D2B0D8F00743791 /* MasterViewController.m in Sources */,
 				FB3F9ECE1D2B0D8F00743791 /* main.m in Sources */,
 				FB3F9ED71D2B0D8F00743791 /* DetailViewController.m in Sources */,
+				FBE7F7941D46AE2D00437192 /* GraphAPICaller.m in Sources */,
 				FB3F9F041D2B0E1F00743791 /* LoginViewController.m in Sources */,
+				FB4DCF5B1D47F05B0064FA5C /* AddTaskViewController.m in Sources */,
+				FBE7F79C1D46EF2300437192 /* AppData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +535,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.microsoft.azure.samples.SampleForB2C;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -520,6 +549,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.microsoft.azure.samples.SampleForB2C;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

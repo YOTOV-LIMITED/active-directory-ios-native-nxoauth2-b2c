@@ -19,6 +19,7 @@
 		FB3F9EF51D2B0D8F00743791 /* SampleForB2CUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3F9EF41D2B0D8F00743791 /* SampleForB2CUITests.m */; };
 		FB3F9F041D2B0E1F00743791 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB3F9F031D2B0E1F00743791 /* LoginViewController.m */; };
 		FB4DCF5B1D47F05B0064FA5C /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4DCF5A1D47F05B0064FA5C /* AddTaskViewController.m */; };
+		FB4DCF5E1D481FA00064FA5C /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = FB4DCF5C1D481FA00064FA5C /* Task.m */; };
 		FBE7F7941D46AE2D00437192 /* GraphAPICaller.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE7F7931D46AE2D00437192 /* GraphAPICaller.m */; };
 		FBE7F7971D46B14100437192 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = FBE7F7961D46B14100437192 /* Task.m */; };
 		FBE7F7991D46EE5600437192 /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = FBE7F7981D46EE5600437192 /* settings.plist */; };
@@ -68,6 +69,8 @@
 		FB3F9F031D2B0E1F00743791 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		FB4DCF591D47F05B0064FA5C /* AddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskViewController.h; sourceTree = "<group>"; };
 		FB4DCF5A1D47F05B0064FA5C /* AddTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskViewController.m; sourceTree = "<group>"; };
+		FB4DCF5C1D481FA00064FA5C /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
+		FB4DCF5D1D481FA00064FA5C /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
 		FBE7F7921D46AE2D00437192 /* GraphAPICaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphAPICaller.h; sourceTree = "<group>"; };
 		FBE7F7931D46AE2D00437192 /* GraphAPICaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphAPICaller.m; sourceTree = "<group>"; };
 		FBE7F7951D46B14100437192 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Task.h; path = ../Task.h; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 		FB3F9ECB1D2B0D8F00743791 /* SampleForB2C */ = {
 			isa = PBXGroup;
 			children = (
+				FB4DCF5C1D481FA00064FA5C /* Task.m */,
+				FB4DCF5D1D481FA00064FA5C /* Task.h */,
 				FBE7F7951D46B14100437192 /* Task.h */,
 				FBE7F7961D46B14100437192 /* Task.m */,
 				FB3F9ECF1D2B0D8F00743791 /* AppDelegate.h */,
@@ -380,6 +385,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB4DCF5E1D481FA00064FA5C /* Task.m in Sources */,
 				FBE7F7971D46B14100437192 /* Task.m in Sources */,
 				FB3F9ED11D2B0D8F00743791 /* AppDelegate.m in Sources */,
 				FB3F9ED41D2B0D8F00743791 /* MasterViewController.m in Sources */,

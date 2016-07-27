@@ -27,9 +27,10 @@ From your shell or command line:
 
 If you'd like to see the sample working immediately, you can simply run the app as-is without any code changes.
 
+```
 $ pod install
-$ open B2CSample.xcworkspacae
-
+$ open SampleForB2C.xcworkspacae
+```
 Then run on your emulated device of choice.
 
 The default configuration for this application performs sign-in & sign-up using our sample B2C tenant, `fabrikamb2c.onmicrosoft.com`.  It uses one [policy](https://azure.microsoft.com/documentation/articles/active-directory-b2c-reference-policies); a sign-up and sign-on policy named `b2c_1_sisu` aSign up for the app using any of the available account types, and try signing in again with the same account.

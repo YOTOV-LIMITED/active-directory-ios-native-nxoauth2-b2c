@@ -21,7 +21,7 @@ Getting started is simple! To run this sample you will need:
 
 From your shell or command line:
 
-`git clone https://github.com/Azure-Samples/active-directory-ios-native-nxoauth2-b2c.git`
+`git clone --branch complete https://github.com/Azure-Samples/active-directory-ios-native-nxoauth2-b2c.git`
 
 ### Step 2: Run the sample using our sample tenant
 

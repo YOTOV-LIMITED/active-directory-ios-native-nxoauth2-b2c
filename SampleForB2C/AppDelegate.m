@@ -27,7 +27,9 @@
   navigationController.topViewController.navigationItem.leftBarButtonItem =
       splitViewController.displayModeButtonItem;
   splitViewController.delegate = self;
-  [self setupOAuth2AccountStore];
+
+ // [self setupOAuth2AccountStore];
+
   return YES;
 }
 
@@ -82,34 +84,6 @@
   }
 }
 
-- (void)setupOAuth2AccountStore {
-  AppData *data = [AppData getInstance];
-
-  NSDictionary *customHeaders =
-      [NSDictionary dictionaryWithObject:@"application/x-www-form-urlencoded"
-                                  forKey:@"Content-Type"];
-
-  // Azure B2C needs
-  // kNXOAuth2AccountStoreConfigurationAdditionalAuthenticationParameters for
-  // sending policy to the server,
-  // therefore we use -setConfiguration:forAccountType:
-  NSDictionary *B2cConfigDict = @{
-    kNXOAuth2AccountStoreConfigurationClientID : data.clientID,
-    kNXOAuth2AccountStoreConfigurationSecret : data.clientSecret,
-    kNXOAuth2AccountStoreConfigurationScope :
-        [NSSet setWithObjects:@"openid", data.clientID, nil],
-    kNXOAuth2AccountStoreConfigurationAuthorizeURL :
-        [NSURL URLWithString:data.authURL],
-    kNXOAuth2AccountStoreConfigurationTokenURL :
-        [NSURL URLWithString:data.tokenURL],
-    kNXOAuth2AccountStoreConfigurationRedirectURL :
-        [NSURL URLWithString:data.bhh],
-    kNXOAuth2AccountStoreConfigurationCustomHeaderFields : customHeaders,
-    //      kNXOAuth2AccountStoreConfigurationAdditionalAuthenticationParameters:customAuthenticationParameters
-  };
-
-  [[NXOAuth2AccountStore sharedStore] setConfiguration:B2cConfigDict
-                                        forAccountType:data.accountIdentifier];
-}
+// Insert your setupOAuth2AccountStore code here in the walkthrough
 
 @end

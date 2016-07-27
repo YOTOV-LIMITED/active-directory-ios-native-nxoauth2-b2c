@@ -10,18 +10,6 @@
 
 @interface AppData : NSObject
 
-@property(strong) NSString *accountIdentifier;
-@property(strong) NSString *taskApiString;
-@property(strong) NSString *authURL;
-@property(strong) NSString *clientID;
-@property(strong) NSString *loginURL;
-@property(strong) NSString *bhh;
-@property(strong) NSString *keychain;
-@property(strong) NSString *tokenURL;
-@property(strong) NSString *clientSecret;
-@property(strong) NSString *contentType;
-@property(strong) NSString *kIDMOAuth2SuccessPagePrefix;
-
-+ (id)getInstance;
+// Add code from the B2C Walkthrough here
 
 @end

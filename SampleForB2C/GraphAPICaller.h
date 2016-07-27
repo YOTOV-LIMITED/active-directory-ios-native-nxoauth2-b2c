@@ -11,9 +11,6 @@
 
 @interface GraphAPICaller : NSObject <NSURLConnectionDataDelegate>
 
-+ (void)addTask:(Task *)task
-completionBlock:(void (^)(bool, NSError *error))completionBlock;
-
-+ (void)getTaskList:(void (^)(NSMutableArray *, NSError *error))completionBlock;
+// Add Code from the B2C Walkthrough here
 
 @end
